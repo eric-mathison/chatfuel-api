@@ -10,6 +10,7 @@
     "scripts": {
         "start": "node dist/server.js",
         "babel": "babel src -d dist",
+        "babeldev": "babel src -w -d dist",
         "lint": "eslint src test",
         "test": "mocha"
     },
