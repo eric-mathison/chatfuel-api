@@ -83,4 +83,22 @@ describe('Messages', () => {
             ],
         });
     });
+
+    it('should return a video message', () => {
+        const testVideo = 'https://test.com/uploads/video.mp4';
+        const response = new Message().video(testVideo);
+
+        expect(response).to.deep.equal({
+            messages: [
+                {
+                    attachment: {
+                        type: 'video',
+                        payload: {
+                            url: testVideo,
+                        },
+                    },
+                },
+            ],
+        });
+    });
 });

@@ -1,5 +1,6 @@
 import textMessage from './types/text';
 import imageMessage from './types/image';
+import videoMessage from './types/video';
 
 class Message {
     constructor() {
@@ -18,6 +19,11 @@ class Message {
 
     image(url) {
         this.addMessages(imageMessage(url));
+        return this;
+    }
+
+    video(url) {
+        this.addMessages(videoMessage(url));
         return this;
     }
 }
