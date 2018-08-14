@@ -44,4 +44,43 @@ describe('Messages', () => {
             ],
         });
     });
+
+    it('should return an image message', () => {
+        const testImage = 'https://test.com/uploads/image.png';
+        const response = new Message().image(testImage);
+
+        expect(response).to.deep.equal({
+            messages: [
+                {
+                    attachment: {
+                        type: 'image',
+                        payload: {
+                            url: testImage,
+                        },
+                    },
+                },
+            ],
+        });
+    });
+
+    it('should return a text message and image message', () => {
+        const testImage = 'https://test.com/uploads/image.png';
+        const response = new Message()
+            .text('This is a test text message')
+            .image(testImage);
+
+        expect(response).to.deep.equal({
+            messages: [
+                { text: 'This is a test text message' },
+                {
+                    attachment: {
+                        type: 'image',
+                        payload: {
+                            url: testImage,
+                        },
+                    },
+                },
+            ],
+        });
+    });
 });
