@@ -5,9 +5,9 @@ const imageMessage = (url) => {
         throw new Error('Expected an url parameter');
     }
 
-    const validateImage = () => /\.(?:jpg|gif|png)$/.test(url);
+    const validateUrl = () => /\.(?:jpg|gif|png)$/.test(url);
 
-    if (!validateImage()) {
+    if (!validateUrl()) {
         throw new Error('Expected url to contain an image');
     }
 

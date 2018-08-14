@@ -101,4 +101,35 @@ describe('Messages', () => {
             ],
         });
     });
+
+    it('should return a combination of a text, image, and audio message', () => {
+        const testImage = 'https://test.com/uploads/image.png';
+        const testAudio = 'https://test.com/uploads/audio.mp3';
+        const response = new Message()
+            .text('This is a test text message')
+            .image(testImage)
+            .audio(testAudio);
+
+        expect(response).to.deep.equal({
+            messages: [
+                { text: 'This is a test text message' },
+                {
+                    attachment: {
+                        type: 'image',
+                        payload: {
+                            url: testImage,
+                        },
+                    },
+                },
+                {
+                    attachment: {
+                        type: 'audio',
+                        payload: {
+                            url: testAudio,
+                        },
+                    },
+                },
+            ],
+        });
+    });
 });

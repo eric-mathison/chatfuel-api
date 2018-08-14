@@ -5,9 +5,9 @@ const videoMessage = (url) => {
         throw new Error('Expected an url parameter');
     }
 
-    const validateImage = () => /\.(mp4)$/.test(url);
+    const validateUrl = () => /\.(mp4)$/.test(url);
 
-    if (!validateImage()) {
+    if (!validateUrl()) {
         throw new Error('Expected url to contain a mp4 file');
     }
 
