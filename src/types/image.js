@@ -1,6 +1,6 @@
 import attachment from './attachment';
 
-const imageMessage = url => {
+const imageMessage = (url) => {
     if (!url) {
         throw new Error('Expected an url parameter');
     }
