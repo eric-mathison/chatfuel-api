@@ -2,6 +2,7 @@ import textMessage from './types/text';
 import imageMessage from './types/image';
 import videoMessage from './types/video';
 import audioMessage from './types/audio';
+import fileMessage from './types/file';
 
 class Message {
     constructor() {
@@ -30,6 +31,11 @@ class Message {
 
     audio(url) {
         this.addMessages(audioMessage(url));
+        return this;
+    }
+
+    file(url) {
+        this.addMessages(fileMessage(url));
         return this;
     }
 }

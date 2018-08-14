@@ -132,4 +132,22 @@ describe('Messages', () => {
             ],
         });
     });
+
+    it('should return a file message', () => {
+        const testFile = 'https://test.com/uploads/file.pdf';
+        const response = new Message().file(testFile);
+
+        expect(response).to.deep.equal({
+            messages: [
+                {
+                    attachment: {
+                        type: 'file',
+                        payload: {
+                            url: testFile,
+                        },
+                    },
+                },
+            ],
+        });
+    });
 });
