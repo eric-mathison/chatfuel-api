@@ -1,3 +1,3 @@
-import Message from './message';
+import Chatfuel from './chatfuel';
 
-export default Message;
+export default Chatfuel;
