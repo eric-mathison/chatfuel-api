@@ -8,6 +8,8 @@ import urlButton from './types/buttons/urlButton';
 import jsonButton from './types/buttons/jsonButton';
 import gallery from './types/gallery';
 import galleryCard from './types/galleryCard';
+import list from './types/list';
+import listItem from './types/listItem';
 
 class Chatfuel {
     constructor() {
@@ -108,6 +110,17 @@ class Chatfuel {
     addGalleryCard(title, imageUrl, subTitle, ...buttons) {
         const card = galleryCard(title, imageUrl, subTitle, buttons);
         this.addElements('gallery', card);
+        return this;
+    }
+
+    addList() {
+        this.addMessages(list(...this.wrapper.elements));
+        return this;
+    }
+
+    addListItem(title, imageUrl, subTitle, ...buttons) {
+        const item = listItem(title, imageUrl, subTitle, buttons);
+        this.addElements('list', item);
         return this;
     }
 }

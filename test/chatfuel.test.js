@@ -286,7 +286,7 @@ describe('Messages', () => {
         });
     });
 
-    it('should return multiple elements in a response', () => {
+    it('should return multiple gallery elements in a response', () => {
         const buttons = new Chatfuel()
             .addButton('link', 'https://test.com/test', 'Button 1')
             .addButton('link', 'https://test.com/test', 'Button 2')
@@ -308,6 +308,112 @@ describe('Messages', () => {
                         payload: {
                             template_type: 'generic',
                             image_aspect_ratio: 'square',
+                            elements: [
+                                {
+                                    title: 'Title 1',
+                                    image_url: testImageUrl,
+                                    subtitle: 'Subtitle 1',
+                                    buttons: [
+                                        {
+                                            type: 'web_url',
+                                            url: 'https://test.com/test',
+                                            title: 'Button 1',
+                                        },
+                                        {
+                                            type: 'web_url',
+                                            url: 'https://test.com/test',
+                                            title: 'Button 2',
+                                        },
+                                    ],
+                                },
+                                {
+                                    title: 'Title 2',
+                                    image_url: testImageUrl,
+                                    subtitle: 'Subtitle 2',
+                                    buttons: [
+                                        {
+                                            type: 'web_url',
+                                            url: 'https://test.com/test',
+                                            title: 'Button 1',
+                                        },
+                                        {
+                                            type: 'web_url',
+                                            url: 'https://test.com/test',
+                                            title: 'Button 2',
+                                        },
+                                    ],
+                                },
+                            ],
+                        },
+                    },
+                },
+            ],
+        });
+    });
+
+    it('should return a list message', () => {
+        const buttons = new Chatfuel()
+            .addButton('link', 'https://test.com/test', 'Button 1')
+            .render('button');
+
+        const testImageUrl = 'https://test.com/test/test.png';
+
+        const response = new Chatfuel()
+            .addListItem('Test Title', testImageUrl, 'Test Subtitle', buttons)
+            .addList()
+            .render();
+
+        expect(response).to.deep.equal({
+            messages: [
+                {
+                    attachment: {
+                        type: 'template',
+                        payload: {
+                            template_type: 'list',
+                            top_element_style: 'compact',
+                            elements: [
+                                {
+                                    title: 'Test Title',
+                                    image_url: 'https://test.com/test/test.png',
+                                    subtitle: 'Test Subtitle',
+                                    buttons: [
+                                        {
+                                            type: 'web_url',
+                                            url: 'https://test.com/test',
+                                            title: 'Button 1',
+                                        },
+                                    ],
+                                },
+                            ],
+                        },
+                    },
+                },
+            ],
+        });
+    });
+
+    it('should return multiple list elements in a response', () => {
+        const buttons = new Chatfuel()
+            .addButton('link', 'https://test.com/test', 'Button 1')
+            .addButton('link', 'https://test.com/test', 'Button 2')
+            .render('button');
+
+        const testImageUrl = 'https://test.com/test/test.png';
+
+        const response = new Chatfuel()
+            .addListItem('Title 1', testImageUrl, 'Subtitle 1', buttons)
+            .addListItem('Title 2', testImageUrl, 'Subtitle 2', buttons)
+            .addList()
+            .render();
+
+        expect(response).to.deep.equal({
+            messages: [
+                {
+                    attachment: {
+                        type: 'template',
+                        payload: {
+                            template_type: 'list',
+                            top_element_style: 'compact',
                             elements: [
                                 {
                                     title: 'Title 1',
