@@ -6,10 +6,13 @@ import fileMessage from './types/file';
 import blockButton from './types/buttons/blockButton';
 import urlButton from './types/buttons/urlButton';
 import jsonButton from './types/buttons/jsonButton';
+import gallery from './types/gallery';
+import galleryCard from './types/galleryCard';
 
 class Chatfuel {
     constructor() {
         this.template = {};
+        this.wrapper = {};
     }
 
     addMessages(message) {
@@ -18,61 +21,42 @@ class Chatfuel {
         }
 
         this.template.messages = [...this.template.messages, message];
-        return this;
+        return this.template;
     }
 
     addButtons(button) {
-        if (!this.template.buttons) {
-            this.template.buttons = [];
+        if (!this.wrapper.buttons) {
+            this.wrapper.buttons = [];
         }
 
-        this.template.buttons = [...this.template.buttons, button];
-        this.template.buttons.length = Math.min(
-            this.template.buttons.length,
-            3
-        );
-        return this.template;
+        this.wrapper.buttons = [...this.wrapper.buttons, button];
+        this.wrapper.buttons.length = Math.min(this.wrapper.buttons.length, 3);
+        return this.wrapper;
     }
 
-    addElements(element) {
-        if (!this.template.elements) {
-            this.template.elements = [];
+    addElements(type, element) {
+        if (!this.wrapper.elements) {
+            this.wrapper.elements = [];
         }
 
-        this.template.elements = [...this.template.elements, element];
-        if (element === 'gallery') {
-            this.template.elements.length = Math.min(
-                this.template.elements.length,
+        this.wrapper.elements = [...this.wrapper.elements, element];
+        if (type === 'gallery') {
+            this.wrapper.elements.length = Math.min(
+                this.wrapper.elements.length,
                 10
             );
         }
-        if (element === 'list') {
-            this.template.elements.length = Math.min(
-                this.template.elements.length,
+        if (type === 'list') {
+            this.wrapper.elements.length = Math.min(
+                this.wrapper.elements.length,
                 5
             );
         }
-        return this.template;
+        return this.wrapper;
     }
 
-    render() {
-        return this.template;
-    }
-
-    addButton(type, attr, title) {
-        if (type === 'block') {
-            this.addButtons(blockButton(attr, title));
-            return this;
-        }
-        if (type === 'link') {
-            this.addButtons(urlButton(attr, title));
-            return this;
-        }
-        if (type === 'json') {
-            this.addButtons(jsonButton(attr, title));
-            return this;
-        }
-        return this;
+    render(type) {
+        return type === 'button' ? this.wrapper : this.template;
     }
 
     addText(textInput) {
@@ -97,6 +81,33 @@ class Chatfuel {
 
     addFile(url) {
         this.addMessages(fileMessage(url));
+        return this;
+    }
+
+    addButton(type, attr, title) {
+        if (type === 'block') {
+            this.addButtons(blockButton(attr, title));
+            return this;
+        }
+        if (type === 'link') {
+            this.addButtons(urlButton(attr, title));
+            return this;
+        }
+        if (type === 'json') {
+            this.addButtons(jsonButton(attr, title));
+            return this;
+        }
+        return this;
+    }
+
+    addGallery() {
+        this.addMessages(gallery(...this.wrapper.elements));
+        return this;
+    }
+
+    addGalleryCard(title, imageUrl, subTitle, ...buttons) {
+        const card = galleryCard(title, imageUrl, subTitle, buttons);
+        this.addElements('gallery', card);
         return this;
     }
 }

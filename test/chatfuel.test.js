@@ -158,7 +158,7 @@ describe('Messages', () => {
     it('should return a block button', () => {
         const response = new Chatfuel()
             .addButton('block', 'Test Block', 'Test Button')
-            .render();
+            .render('button');
 
         expect(response).to.deep.equal({
             buttons: [
@@ -176,7 +176,7 @@ describe('Messages', () => {
         const response = new Chatfuel()
             .addButton('block', 'Test Block', 'Block Button')
             .addButton('link', testUrl, 'Url Button')
-            .render();
+            .render('button');
 
         expect(response).to.deep.equal({
             buttons: [
@@ -198,7 +198,7 @@ describe('Messages', () => {
         const testUrl = 'https://test.com/test/api';
         const response = new Chatfuel()
             .addButton('json', testUrl, 'JSON Button')
-            .render();
+            .render('button');
 
         expect(response).to.deep.equal({
             buttons: [
@@ -217,7 +217,7 @@ describe('Messages', () => {
             .addButton('block', 'Test Block 2', 'Test Button 2')
             .addButton('block', 'Test Block 3', 'Test Button 3')
             .addButton('block', 'Test Block 4', 'Test Button 4')
-            .render();
+            .render('button');
 
         expect(response).to.deep.equal({
             buttons: [
@@ -235,6 +235,117 @@ describe('Messages', () => {
                     type: 'show_block',
                     block_names: ['Test Block 3'],
                     title: 'Test Button 3',
+                },
+            ],
+        });
+    });
+
+    it('should return a gallery message', () => {
+        const buttons = new Chatfuel()
+            .addButton('link', 'https://test.com/test', 'Button 1')
+            .render('button');
+
+        const testImageUrl = 'https://test.com/test/test.png';
+
+        const response = new Chatfuel()
+            .addGalleryCard(
+                'Test Title',
+                testImageUrl,
+                'Test Subtitle',
+                buttons
+            )
+            .addGallery()
+            .render();
+
+        expect(response).to.deep.equal({
+            messages: [
+                {
+                    attachment: {
+                        type: 'template',
+                        payload: {
+                            template_type: 'generic',
+                            image_aspect_ratio: 'square',
+                            elements: [
+                                {
+                                    title: 'Test Title',
+                                    image_url: 'https://test.com/test/test.png',
+                                    subtitle: 'Test Subtitle',
+                                    buttons: [
+                                        {
+                                            type: 'web_url',
+                                            url: 'https://test.com/test',
+                                            title: 'Button 1',
+                                        },
+                                    ],
+                                },
+                            ],
+                        },
+                    },
+                },
+            ],
+        });
+    });
+
+    it('should return multiple elements in a response', () => {
+        const buttons = new Chatfuel()
+            .addButton('link', 'https://test.com/test', 'Button 1')
+            .addButton('link', 'https://test.com/test', 'Button 2')
+            .render('button');
+
+        const testImageUrl = 'https://test.com/test/test.png';
+
+        const response = new Chatfuel()
+            .addGalleryCard('Title 1', testImageUrl, 'Subtitle 1', buttons)
+            .addGalleryCard('Title 2', testImageUrl, 'Subtitle 2', buttons)
+            .addGallery()
+            .render();
+
+        expect(response).to.deep.equal({
+            messages: [
+                {
+                    attachment: {
+                        type: 'template',
+                        payload: {
+                            template_type: 'generic',
+                            image_aspect_ratio: 'square',
+                            elements: [
+                                {
+                                    title: 'Title 1',
+                                    image_url: testImageUrl,
+                                    subtitle: 'Subtitle 1',
+                                    buttons: [
+                                        {
+                                            type: 'web_url',
+                                            url: 'https://test.com/test',
+                                            title: 'Button 1',
+                                        },
+                                        {
+                                            type: 'web_url',
+                                            url: 'https://test.com/test',
+                                            title: 'Button 2',
+                                        },
+                                    ],
+                                },
+                                {
+                                    title: 'Title 2',
+                                    image_url: testImageUrl,
+                                    subtitle: 'Subtitle 2',
+                                    buttons: [
+                                        {
+                                            type: 'web_url',
+                                            url: 'https://test.com/test',
+                                            title: 'Button 1',
+                                        },
+                                        {
+                                            type: 'web_url',
+                                            url: 'https://test.com/test',
+                                            title: 'Button 2',
+                                        },
+                                    ],
+                                },
+                            ],
+                        },
+                    },
                 },
             ],
         });
