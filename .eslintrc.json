@@ -2,7 +2,8 @@
     "extends": "airbnb-base",
     "plugins": ["mocha"],
     "rules": {
-        "indent": ["error", 4]
+        "indent": ["error", 4],
+        "comma-dangle": ["error", "only-multiline"]
     },
     "env": {
         "browser": true,
