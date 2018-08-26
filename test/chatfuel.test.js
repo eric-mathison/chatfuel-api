@@ -398,11 +398,16 @@ describe('Messages', () => {
             .addButton('link', 'https://test.com/test', 'Button 2')
             .render('button');
 
+        const listButton = new Chatfuel()
+            .addButton('link', 'https://test.com/read', 'Read More')
+            .render('button');
+
         const testImageUrl = 'https://test.com/test/test.png';
 
         const response = new Chatfuel()
             .addListItem('Title 1', testImageUrl, 'Subtitle 1', buttons)
             .addListItem('Title 2', testImageUrl, 'Subtitle 2', buttons)
+            .addListButton(listButton)
             .addList()
             .render();
 
@@ -448,6 +453,13 @@ describe('Messages', () => {
                                             title: 'Button 2',
                                         },
                                     ],
+                                },
+                            ],
+                            buttons: [
+                                {
+                                    title: 'Read More',
+                                    type: 'web_url',
+                                    url: 'https://test.com/read',
                                 },
                             ],
                         },

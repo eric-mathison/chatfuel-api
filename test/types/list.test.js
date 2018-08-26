@@ -20,7 +20,7 @@ describe('List Messages', () => {
                 },
             ],
         };
-        const response = list(elements);
+        const response = list(undefined, elements);
 
         expect(response).to.deep.equal({
             attachment: {

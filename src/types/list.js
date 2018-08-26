@@ -1,6 +1,6 @@
 import attachment from './attachment';
 
-const list = (...elements) => {
+const list = (buttons, ...elements) => {
     if (Object.keys(elements).length === 0) {
         throw new Error('Expected an element parameter');
     }
@@ -13,6 +13,11 @@ const list = (...elements) => {
         top_element_style: 'compact',
         elements: elementsArray,
     };
+
+    if (buttons !== undefined) {
+        const buttonsArray = !buttons.buttons ? buttons : buttons.buttons;
+        listWrapper.buttons = buttonsArray;
+    }
 
     const response = attachment('template', listWrapper);
 

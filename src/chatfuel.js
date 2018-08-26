@@ -114,7 +114,14 @@ class Chatfuel {
     }
 
     addList() {
-        this.addMessages(list(...this.wrapper.elements));
+        this.addMessages(
+            list(this.wrapper.listButton, ...this.wrapper.elements)
+        );
+        return this;
+    }
+
+    addListButton(button) {
+        this.wrapper.listButton = button;
         return this;
     }
 
