@@ -43,16 +43,10 @@ class Chatfuel {
 
         this.wrapper.elements = [...this.wrapper.elements, element];
         if (type === 'gallery') {
-            this.wrapper.elements.length = Math.min(
-                this.wrapper.elements.length,
-                10
-            );
+            this.wrapper.elements.length = Math.min(this.wrapper.elements.length, 10);
         }
         if (type === 'list') {
-            this.wrapper.elements.length = Math.min(
-                this.wrapper.elements.length,
-                5
-            );
+            this.wrapper.elements.length = Math.min(this.wrapper.elements.length, 5);
         }
         return this.wrapper;
     }
@@ -114,9 +108,7 @@ class Chatfuel {
     }
 
     addList() {
-        this.addMessages(
-            list(this.wrapper.listButton, ...this.wrapper.elements)
-        );
+        this.addMessages(list(this.wrapper.listButton, ...this.wrapper.elements));
         return this;
     }
 
