@@ -10,6 +10,7 @@ import gallery from './types/gallery';
 import galleryCard from './types/galleryCard';
 import list from './types/list';
 import listItem from './types/listItem';
+import buttonBlock from './types/buttonBlock';
 
 class Chatfuel {
     constructor() {
@@ -93,6 +94,11 @@ class Chatfuel {
             this.addButtons(jsonButton(attr, title));
             return this;
         }
+        return this;
+    }
+
+    addButtonBlock(textInput, buttons) {
+        this.addMessages(buttonBlock(textInput, buttons));
         return this;
     }
 

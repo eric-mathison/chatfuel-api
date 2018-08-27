@@ -8,9 +8,7 @@ describe('Messages', () => {
     });
 
     it('should return one text message', () => {
-        const response = new Chatfuel()
-            .addText('This is a test message')
-            .render();
+        const response = new Chatfuel().addText('This is a test message').render();
 
         expect(response).to.deep.equal({
             messages: [{ text: 'This is a test message' }],
@@ -196,9 +194,7 @@ describe('Messages', () => {
 
     it('should return a json button', () => {
         const testUrl = 'https://test.com/test/api';
-        const response = new Chatfuel()
-            .addButton('json', testUrl, 'JSON Button')
-            .render('button');
+        const response = new Chatfuel().addButton('json', testUrl, 'JSON Button').render('button');
 
         expect(response).to.deep.equal({
             buttons: [
@@ -240,6 +236,48 @@ describe('Messages', () => {
         });
     });
 
+    it('should return a button block', () => {
+        const text = 'This is a test button block';
+        const buttons = new Chatfuel()
+            .addButton('link', 'https://test.com/test', 'URL Button')
+            .addButton('block', 'Test Block', 'Block Button')
+            .addButton('block', 'Another Block', 'Block Button 2')
+            .render('button');
+
+        const response = new Chatfuel().addButtonBlock(text, buttons).render();
+
+        expect(response).to.deep.equal({
+            messages: [
+                {
+                    attachment: {
+                        type: 'template',
+                        payload: {
+                            template_type: 'button',
+                            text: 'This is a test button block',
+                            buttons: [
+                                {
+                                    type: 'web_url',
+                                    url: 'https://test.com/test',
+                                    title: 'URL Button',
+                                },
+                                {
+                                    type: 'show_block',
+                                    block_names: ['Test Block'],
+                                    title: 'Block Button',
+                                },
+                                {
+                                    type: 'show_block',
+                                    block_names: ['Another Block'],
+                                    title: 'Block Button 2',
+                                },
+                            ],
+                        },
+                    },
+                },
+            ],
+        });
+    });
+
     it('should return a gallery message', () => {
         const buttons = new Chatfuel()
             .addButton('link', 'https://test.com/test', 'Button 1')
@@ -248,12 +286,7 @@ describe('Messages', () => {
         const testImageUrl = 'https://test.com/test/test.png';
 
         const response = new Chatfuel()
-            .addGalleryCard(
-                'Test Title',
-                testImageUrl,
-                'Test Subtitle',
-                buttons
-            )
+            .addGalleryCard('Test Title', testImageUrl, 'Test Subtitle', buttons)
             .addGallery()
             .render();
 
