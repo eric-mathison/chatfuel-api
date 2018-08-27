@@ -1,6 +1,6 @@
-import attachment from './attachment';
+import attachments from './attachment';
 
-const videoMessage = (url) => {
+const videoMessage = (url, qReplies) => {
     if (!url) {
         throw new Error('Expected an url parameter');
     }
@@ -11,7 +11,7 @@ const videoMessage = (url) => {
         throw new Error('Expected url to contain a mp4 file');
     }
 
-    const response = attachment('video', { url });
+    const response = attachments('video', { url }, qReplies);
 
     return response;
 };

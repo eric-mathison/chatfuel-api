@@ -1,6 +1,6 @@
-import attachment from './attachment';
+import attachments from './attachment';
 
-const imageMessage = (url) => {
+const imageMessage = (url, qReplies) => {
     if (!url) {
         throw new Error('Expected an url parameter');
     }
@@ -11,7 +11,7 @@ const imageMessage = (url) => {
         throw new Error('Expected url to contain an image');
     }
 
-    const response = attachment('image', { url });
+    const response = attachments('image', { url }, qReplies);
 
     return response;
 };

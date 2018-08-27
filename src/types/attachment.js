@@ -1,8 +1,17 @@
-const attachment = (type, payload) => ({
-    attachment: {
-        type,
-        payload,
-    },
-});
+const attachments = (type, payload, qReplies) => {
+    const attachment = {
+        attachment: {
+            type,
+            payload,
+        },
+    };
 
-export default attachment;
+    if (qReplies !== undefined) {
+        const qRArray = !qReplies.quick_replies ? qReplies[0] : qReplies.quick_replies;
+        attachment.quick_replies = qRArray;
+    }
+
+    return attachment;
+};
+
+export default attachments;

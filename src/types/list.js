@@ -1,12 +1,11 @@
-import attachment from './attachment';
+import attachments from './attachment';
 
 const list = (buttons, ...elements) => {
     if (Object.keys(elements).length === 0) {
         throw new Error('Expected an element parameter');
     }
 
-    const elementsArray =
-        Object.keys(elements).length >= 1 ? elements : elements[0];
+    const elementsArray = Object.keys(elements).length >= 1 ? elements : elements[0];
 
     const listWrapper = {
         template_type: 'list',
@@ -19,7 +18,7 @@ const list = (buttons, ...elements) => {
         listWrapper.buttons = buttonsArray;
     }
 
-    const response = attachment('template', listWrapper);
+    const response = attachments('template', listWrapper);
 
     return response;
 };

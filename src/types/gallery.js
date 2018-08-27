@@ -1,12 +1,11 @@
-import attachment from './attachment';
+import attachments from './attachment';
 
 const gallery = (...elements) => {
     if (Object.keys(elements).length === 0) {
         throw new Error('Expected an element parameter');
     }
 
-    const elementsArray =
-        Object.keys(elements).length >= 1 ? elements : elements[0];
+    const elementsArray = Object.keys(elements).length >= 1 ? elements : elements[0];
 
     const galleryWrapper = {
         template_type: 'generic',
@@ -14,7 +13,7 @@ const gallery = (...elements) => {
         elements: elementsArray,
     };
 
-    const response = attachment('template', galleryWrapper);
+    const response = attachments('template', galleryWrapper);
 
     return response;
 };

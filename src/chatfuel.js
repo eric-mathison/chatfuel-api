@@ -6,11 +6,14 @@ import fileMessage from './types/file';
 import blockButton from './types/buttons/blockButton';
 import urlButton from './types/buttons/urlButton';
 import jsonButton from './types/buttons/jsonButton';
+import callButton from './types/buttons/callButton';
+import shareButton from './types/buttons/shareButton';
 import gallery from './types/gallery';
 import galleryCard from './types/galleryCard';
 import list from './types/list';
 import listItem from './types/listItem';
 import buttonBlock from './types/buttonBlock';
+import quickReply from './types/quickReply';
 
 class Chatfuel {
     constructor() {
@@ -18,7 +21,7 @@ class Chatfuel {
         this.wrapper = {};
     }
 
-    addMessages(message) {
+    messages(message) {
         if (!this.template.messages) {
             this.template.messages = [];
         }
@@ -27,7 +30,17 @@ class Chatfuel {
         return this.template;
     }
 
-    addButtons(button) {
+    quickReplies(qR) {
+        if (!this.wrapper.quick_replies) {
+            this.wrapper.quick_replies = [];
+        }
+
+        this.wrapper.quick_replies = [...this.wrapper.quick_replies, qR];
+        this.wrapper.quick_replies.length = Math.min(this.wrapper.quick_replies.length, 11);
+        return this.wrapper;
+    }
+
+    buttons(button) {
         if (!this.wrapper.buttons) {
             this.wrapper.buttons = [];
         }
@@ -37,7 +50,7 @@ class Chatfuel {
         return this.wrapper;
     }
 
-    addElements(type, element) {
+    elements(type, element) {
         if (!this.wrapper.elements) {
             this.wrapper.elements = [];
         }
@@ -53,68 +66,76 @@ class Chatfuel {
     }
 
     render(type) {
-        return type === 'button' ? this.wrapper : this.template;
+        return type === 'button' || type === 'qr' ? this.wrapper : this.template;
     }
 
-    addText(textInput) {
-        this.addMessages(textMessage(textInput));
+    addText(textInput, qReplies) {
+        this.messages(textMessage(textInput, qReplies));
         return this;
     }
 
-    addImage(url) {
-        this.addMessages(imageMessage(url));
+    addImage(url, qReplies) {
+        this.messages(imageMessage(url, qReplies));
         return this;
     }
 
-    addVideo(url) {
-        this.addMessages(videoMessage(url));
+    addVideo(url, qReplies) {
+        this.messages(videoMessage(url, qReplies));
         return this;
     }
 
-    addAudio(url) {
-        this.addMessages(audioMessage(url));
+    addAudio(url, qReplies) {
+        this.messages(audioMessage(url, qReplies));
         return this;
     }
 
-    addFile(url) {
-        this.addMessages(fileMessage(url));
+    addFile(url, qReplies) {
+        this.messages(fileMessage(url, qReplies));
         return this;
     }
 
     addButton(type, attr, title) {
         if (type === 'block') {
-            this.addButtons(blockButton(attr, title));
+            this.buttons(blockButton(attr, title));
             return this;
         }
         if (type === 'link') {
-            this.addButtons(urlButton(attr, title));
+            this.buttons(urlButton(attr, title));
             return this;
         }
         if (type === 'json') {
-            this.addButtons(jsonButton(attr, title));
+            this.buttons(jsonButton(attr, title));
+            return this;
+        }
+        if (type === 'call') {
+            this.buttons(callButton(attr, title));
+            return this;
+        }
+        if (type === 'share') {
+            this.buttons(shareButton());
             return this;
         }
         return this;
     }
 
-    addButtonBlock(textInput, buttons) {
-        this.addMessages(buttonBlock(textInput, buttons));
+    addButtonBlock(textInput, buttons, qReplies) {
+        this.messages(buttonBlock(textInput, buttons, qReplies));
         return this;
     }
 
     addGallery() {
-        this.addMessages(gallery(...this.wrapper.elements));
+        this.messages(gallery(...this.wrapper.elements));
         return this;
     }
 
     addGalleryCard(title, imageUrl, subTitle, ...buttons) {
         const card = galleryCard(title, imageUrl, subTitle, buttons);
-        this.addElements('gallery', card);
+        this.elements('gallery', card);
         return this;
     }
 
     addList() {
-        this.addMessages(list(this.wrapper.listButton, ...this.wrapper.elements));
+        this.messages(list(this.wrapper.listButton, ...this.wrapper.elements));
         return this;
     }
 
@@ -125,7 +146,12 @@ class Chatfuel {
 
     addListItem(title, imageUrl, subTitle, ...buttons) {
         const item = listItem(title, imageUrl, subTitle, buttons);
-        this.addElements('list', item);
+        this.elements('list', item);
+        return this;
+    }
+
+    addQuickReply(type, attr, title) {
+        this.quickReplies(quickReply(type, attr, title));
         return this;
     }
 }

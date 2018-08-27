@@ -1,6 +1,6 @@
-import attachment from './attachment';
+import attachments from './attachment';
 
-const audioMessage = (url) => {
+const audioMessage = (url, qReplies) => {
     if (!url) {
         throw new Error('Expected an url parameter');
     }
@@ -11,7 +11,7 @@ const audioMessage = (url) => {
         throw new Error('Expected url to contain an audio file');
     }
 
-    const response = attachment('audio', { url });
+    const response = attachments('audio', { url }, qReplies);
 
     return response;
 };

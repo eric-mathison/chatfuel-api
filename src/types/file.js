@@ -1,11 +1,11 @@
-import attachment from './attachment';
+import attachments from './attachment';
 
-const fileMessage = (url) => {
+const fileMessage = (url, qReplies) => {
     if (!url) {
         throw new Error('Expected an url parameter');
     }
 
-    const response = attachment('file', { url });
+    const response = attachments('file', { url }, qReplies);
 
     return response;
 };

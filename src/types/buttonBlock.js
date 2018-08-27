@@ -1,6 +1,6 @@
-import attachment from './attachment';
+import attachments from './attachment';
 
-const buttonBlock = (text, buttons) => {
+const buttonBlock = (text, buttons, qReplies) => {
     if (!text) {
         throw new Error('Expected a text parameter');
     }
@@ -17,7 +17,7 @@ const buttonBlock = (text, buttons) => {
         buttons: buttonsArray,
     };
 
-    const response = attachment('template', buttonWrapper);
+    const response = attachments('template', buttonWrapper, qReplies);
 
     return response;
 };
