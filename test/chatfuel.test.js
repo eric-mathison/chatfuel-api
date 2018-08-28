@@ -805,4 +805,115 @@ describe('Messages', () => {
             });
         });
     });
+
+    describe('Set Attributes Messages', () => {
+        it('should return an attribute message', () => {
+            const attr = {
+                test: 'yes',
+                demo: 'yes',
+                follower: 'no',
+            };
+            const response = new Chatfuel().addAttributes(attr).render();
+
+            expect(response).to.deep.equal({
+                set_attributes: {
+                    test: 'yes',
+                    demo: 'yes',
+                    follower: 'no',
+                },
+            });
+        });
+
+        it('should return an attribute message and json button', () => {
+            const attr = {
+                test: 'yes',
+                demo: 'yes',
+                follower: 'no',
+            };
+            const response = new Chatfuel()
+                .addAttributes(attr, 'json', 'json button', 'https://test.com/test')
+                .render();
+
+            expect(response).to.deep.equal({
+                set_attributes: {
+                    test: 'yes',
+                    demo: 'yes',
+                    follower: 'no',
+                },
+                type: 'json_plugin_url',
+                url: 'https://test.com/test',
+                title: 'json button',
+            });
+        });
+
+        it('should return an attribute with an image message and quick replies', () => {
+            const attr = {
+                demo: 'yes',
+            };
+
+            const qReplies = new Chatfuel()
+                .addQuickReply('block', ['Block 1'], 'Block 1')
+                .addQuickReply('block', ['Block 2'], 'Block 2')
+                .render('qr');
+
+            const response = new Chatfuel()
+                .addAttributes(attr)
+                .addImage('https://test.com/test.png', qReplies)
+                .render();
+
+            expect(response).to.deep.equal({
+                set_attributes: {
+                    demo: 'yes',
+                },
+                messages: [
+                    {
+                        attachment: {
+                            type: 'image',
+                            payload: {
+                                url: 'https://test.com/test.png',
+                            },
+                        },
+                        quick_replies: [
+                            {
+                                title: 'Block 1',
+                                block_names: ['Block 1'],
+                            },
+                            {
+                                title: 'Block 2',
+                                block_names: ['Block 2'],
+                            },
+                        ],
+                    },
+                ],
+            });
+        });
+    });
+
+    describe('Redirect to Blocks', () => {
+        it('should return a redirect to block message', () => {
+            const response = new Chatfuel().addRedirect('block 1', 'block 2').render();
+
+            expect(response).to.deep.equal({
+                redirect_to_blocks: ['block 1', 'block 2'],
+            });
+        });
+
+        it('should return a set attribute and redirect to block message', () => {
+            const attr = {
+                demo: 'yes',
+            };
+
+            const response = new Chatfuel()
+                .addAttributes(attr)
+                .addRedirect('block 1')
+                .render();
+
+            expect(response).to.deep.equal({
+                set_attributes: {
+                    demo: 'yes',
+                },
+                redirect_to_blocks: ['block 1'],
+            });
+        });
+    });
 });

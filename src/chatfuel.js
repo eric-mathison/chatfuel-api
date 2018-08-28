@@ -14,6 +14,7 @@ import list from './types/list';
 import listItem from './types/listItem';
 import buttonBlock from './types/buttonBlock';
 import quickReply from './types/quickReply';
+import attributes from './types/attributes';
 
 class Chatfuel {
     constructor() {
@@ -152,6 +153,16 @@ class Chatfuel {
 
     addQuickReply(type, attr, title) {
         this.quickReplies(quickReply(type, attr, title));
+        return this;
+    }
+
+    addAttributes(attribute, type, title, opt) {
+        this.template = attributes(attribute, type, title, opt);
+        return this;
+    }
+
+    addRedirect(...blocks) {
+        this.template.redirect_to_blocks = blocks;
         return this;
     }
 }
