@@ -1,9 +1,10 @@
 {
-    "extends": "airbnb-base",
-    "plugins": ["mocha"],
+    "extends": ["airbnb-base", "prettier"],
+    "plugins": ["prettier", "mocha"],
     "rules": {
         "indent": ["error", 4],
-        "comma-dangle": ["error", "only-multiline"]
+        "comma-dangle": ["error", "only-multiline"],
+        "prettier/prettier": ["error"]
     },
     "env": {
         "browser": true,

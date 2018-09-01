@@ -28,12 +28,7 @@ describe('Gallery Card', () => {
         const cardTitle = 'Test Gallery Card';
         const cardImage = 'https://test.com/test/image.png';
         const cardSubtitle = 'Test Gallery Card Subtitle';
-        const response = galleryCard(
-            cardTitle,
-            cardImage,
-            cardSubtitle,
-            buttons
-        );
+        const response = galleryCard(cardTitle, cardImage, cardSubtitle, buttons);
 
         expect(response).to.deep.equal({
             title: cardTitle,
