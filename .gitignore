@@ -62,6 +62,7 @@ typings/
 
 # Compiled directories
 dist/
+lib/
 
 # Project specific files
 googleapikey.json

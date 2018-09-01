@@ -1,16 +1,16 @@
 {
     "name": "chatfuel-api",
     "version": "1.0.0",
-    "description": "Send messages to your Chatfuel Bot",
-    "main": "dist/index.js",
+    "description": "Easily send messages to your Chatfuel Bot",
+    "main": "lib/index.js",
     "author": "Eric Mathison <eric.l.mathison@gmail.com>",
     "repository": "git@github.com:eric-mathison/chatfuel-api.git",
     "license": "MIT",
     "private": false,
     "scripts": {
-        "start": "node dist/server.js",
-        "babel": "babel src -d dist",
-        "babeldev": "babel src -w -d dist",
+        "start": "node lib/index.js",
+        "babel": "babel src -d lib",
+        "babeldev": "babel src -w -d lib",
         "lint": "eslint src test",
         "test": "mocha"
     },
