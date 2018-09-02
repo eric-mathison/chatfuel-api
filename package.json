@@ -9,8 +9,9 @@
     "private": false,
     "scripts": {
         "start": "node lib/index.js",
-        "babel": "babel src -d lib",
+        "build": "babel src -d lib",
         "babeldev": "babel src -w -d lib",
+        "prepublish": "yarn lint && yarn test && yarn build",
         "lint": "eslint src test",
         "test": "mocha"
     },
