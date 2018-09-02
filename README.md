@@ -1,6 +1,6 @@
 # chatfuel-api
 
-A library to simplify sending messenges and broadcasts to a Chatfuel bot.
+A library to simplify sending messages and broadcasts to a Chatfuel bot.
 
 [Chatfuel JSON API](https://docs.chatfuel.com/api/json-api/json-api)
 
