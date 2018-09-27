@@ -6,6 +6,10 @@ A library to simplify sending messages and broadcasts to a Chatfuel bot.
 
 [Chatfuel Broadcast API](https://docs.chatfuel.com/api/broadcasting-api/broadcasting-api)
 
+## Requirements
+
+Node version 6 and later are required. Earlier versions are not supported.
+
 ## Install
 
 ```
@@ -20,7 +24,9 @@ yarn add chatfuel-api
 
 ## Usage
 
-TODO
+```
+import { Chatfuel, broadcast } from 'chatfuel-api';
+```
 
 ## Tests
 

@@ -16,12 +16,13 @@ describe('Url Button', () => {
 
     it('should return expected url button', () => {
         const testUrl = 'https://test.com/test/';
-        const response = urlButton(testUrl, 'Test Title');
+        const response = urlButton(testUrl, 'Test Title', true);
 
         expect(response).to.deep.equal({
             type: 'web_url',
             url: testUrl,
             title: 'Test Title',
+            messenger_extensions: true,
         });
     });
 });

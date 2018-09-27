@@ -1,4 +1,4 @@
-const urlButton = (url, title) => {
+const urlButton = (url, title, extensions = false) => {
     if (!url) {
         throw new Error('Expected a url parameter');
     }
@@ -11,6 +11,7 @@ const urlButton = (url, title) => {
         type: 'web_url',
         url,
         title,
+        messenger_extensions: extensions,
     };
 
     return response;
