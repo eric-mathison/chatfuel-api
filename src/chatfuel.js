@@ -95,13 +95,13 @@ class Chatfuel {
         return this;
     }
 
-    addButton(type, attr, title) {
+    addButton(type, attr, title, extensions) {
         if (type === 'block') {
             this.buttons(blockButton(attr, title));
             return this;
         }
         if (type === 'link') {
-            this.buttons(urlButton(attr, title));
+            this.buttons(urlButton(attr, title, extensions));
             return this;
         }
         if (type === 'json') {
