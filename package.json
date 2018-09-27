@@ -1,6 +1,6 @@
 {
     "name": "chatfuel-api",
-    "version": "1.0.1",
+    "version": "1.1.0",
     "description": "A library to simplify sending messages and broadcasts to a Chatfuel bot",
     "main": "lib/index.js",
     "author": "Eric Mathison <eric.l.mathison@gmail.com>",
