@@ -10,6 +10,7 @@ describe('Chatfuel Broadcast', () => {
     const defaultBlockId = 'defaultBotId';
     const defaultToken = 'defaultToken';
     const defaultUserId = 'defaultUserId';
+    const defaultTag = 'defaultTag';
 
     beforeEach(() => {
         defaultOptions = {
@@ -17,6 +18,7 @@ describe('Chatfuel Broadcast', () => {
             blockId: defaultBlockId,
             token: defaultToken,
             userId: defaultUserId,
+            tag: defaultTag,
             attributes: {},
         };
 
@@ -63,7 +65,7 @@ describe('Chatfuel Broadcast', () => {
 
     it('should call expected URL', () => {
         const broadcastURL = `https://api.chatfuel.com/bots/${defaultBotId}/users/${defaultUserId}/send`;
-        const expectedURL = `${broadcastURL}?chatfuel_token=${defaultToken}&chatfuel_block_name=${defaultBlockId}`;
+        const expectedURL = `${broadcastURL}?chatfuel_token=${defaultToken}&chatfuel_message_tag=${defaultTag}&chatfuel_block_name=${defaultBlockId}`;
 
         broadcast(defaultOptions);
 
@@ -80,7 +82,7 @@ describe('Chatfuel Broadcast', () => {
         const fakeAttributeQuery = 'fakeAttribute1=fakeAttribute1&fakeAttribute2=fakeAttribute2';
 
         const broadcastURL = `https://api.chatfuel.com/bots/${defaultBotId}/users/${defaultUserId}/send`;
-        const expectedURL = `${broadcastURL}?chatfuel_token=${defaultToken}&chatfuel_block_name=${defaultBlockId}&${fakeAttributeQuery}`;
+        const expectedURL = `${broadcastURL}?chatfuel_token=${defaultToken}&chatfuel_message_tag=${defaultTag}&chatfuel_block_name=${defaultBlockId}&${fakeAttributeQuery}`;
 
         broadcast(options);
 

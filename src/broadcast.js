@@ -18,7 +18,7 @@ const validateOptionParameters = (options) => {
 const broadcast = (options) => {
     validateOptionParameters(options);
 
-    const { botId, blockId, token, userId, attributes } = options;
+    const { botId, blockId, token, userId, tag, attributes } = options;
 
     const broadcastUrl = `https://api.chatfuel.com/bots/${botId}/users/${userId}/send`;
 
@@ -26,6 +26,7 @@ const broadcast = (options) => {
         {},
         {
             chatfuel_token: token,
+            chatfuel_message_tag: tag,
             chatfuel_block_name: blockId,
         },
         attributes
