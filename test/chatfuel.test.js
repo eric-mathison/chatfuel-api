@@ -860,6 +860,28 @@ describe('Messages', () => {
             });
         });
 
+        it('should return an attribute message and block button', () => {
+            const attr = {
+                test: 'yes',
+                demo: 'yes',
+                follower: 'no',
+            };
+            const response = new Chatfuel()
+                .addAttributes(attr, 'block', 'Block Button', ['Block 1'])
+                .render();
+
+            expect(response).to.deep.equal({
+                set_attributes: {
+                    test: 'yes',
+                    demo: 'yes',
+                    follower: 'no',
+                },
+                type: 'show_block',
+                block_names: ['Block 1'],
+                title: 'Block Button',
+            });
+        });
+
         it('should return an attribute with an image message and quick replies', () => {
             const attr = {
                 demo: 'yes',
