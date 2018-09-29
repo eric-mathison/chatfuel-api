@@ -1,5 +1,7 @@
 # chatfuel-api
 
+[![Build Status](https://travis-ci.org/eric-mathison/chatfuel-api.svg?branch=master)](https://travis-ci.org/eric-mathison/chatfuel-api)
+
 A library to simplify sending messages and broadcasts to a Chatfuel bot.
 
 [Chatfuel JSON API](https://docs.chatfuel.com/api/json-api/json-api)
