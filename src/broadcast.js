@@ -42,7 +42,7 @@ const broadcast = (options) => {
         'Content-Type': 'application/json',
     };
 
-    return axios.post(chatfuelApiUrl, { headers });
+    return axios.post(chatfuelApiUrl, {}, { headers });
 };
 
 export default broadcast;
