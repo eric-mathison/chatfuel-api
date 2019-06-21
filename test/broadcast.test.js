@@ -43,12 +43,6 @@ describe('Chatfuel Broadcast', () => {
             expect(response).to.throw('Expected botId to be passed');
         });
 
-        it('should throw an error if no blockId is passed', () => {
-            delete defaultOptions.blockId;
-            const response = () => broadcast(defaultOptions);
-
-            expect(response).to.throw('Expected blockId to be passed');
-        });
         it('should throw an error if no token is passed', () => {
             delete defaultOptions.token;
             const response = () => broadcast(defaultOptions);

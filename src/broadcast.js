@@ -2,7 +2,7 @@ import url from 'url';
 import axios from 'axios';
 
 const validateOptionParameters = (options) => {
-    const optionParameters = ['botId', 'blockId', 'token', 'userId'];
+    const optionParameters = ['botId', 'token', 'userId'];
 
     if (!options) {
         throw new Error('Expected options to be passed');
