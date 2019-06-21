@@ -31,6 +31,7 @@ const broadcast = (options) => {
         },
         attributes
     );
+    Object.keys(query).forEach((key) => query[key] === undefined && delete query[key]);
 
     const chatfuelApiUrl = url.format({
         pathname: broadcastUrl,

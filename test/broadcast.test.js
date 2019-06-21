@@ -81,4 +81,27 @@ describe('Chatfuel Broadcast', () => {
         broadcast(options);
         expect(stubAxiosPost.getCall(0).args[0]).to.equal(expectedURL);
     });
+
+    it('should exclude tag and blockId from url query', () => {
+        const givenAttributes = {
+            fakeAttribute1: 'fakeAttribute1',
+            fakeAttribute2: 'fakeAttribute2',
+        };
+
+        const defaultOptionsTwo = {
+            botId: defaultBotId,
+            token: defaultToken,
+            userId: defaultUserId,
+            attributes: {},
+        };
+
+        const options = Object.assign({}, defaultOptionsTwo, { attributes: givenAttributes });
+        const fakeAttributeQuery = 'fakeAttribute1=fakeAttribute1&fakeAttribute2=fakeAttribute2';
+
+        const broadcastURL = `https://api.chatfuel.com/bots/${defaultBotId}/users/${defaultUserId}/send`;
+        const expectedURL = `${broadcastURL}?chatfuel_token=${defaultToken}&${fakeAttributeQuery}`;
+
+        broadcast(options);
+        expect(stubAxiosPost.getCall(0).args[0]).to.equal(expectedURL);
+    });
 });
