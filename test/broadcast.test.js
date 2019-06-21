@@ -79,7 +79,6 @@ describe('Chatfuel Broadcast', () => {
         const expectedURL = `${broadcastURL}?chatfuel_token=${defaultToken}&chatfuel_message_tag=${defaultTag}&chatfuel_block_name=${defaultBlockId}&${fakeAttributeQuery}`;
 
         broadcast(options);
-
         expect(stubAxiosPost.getCall(0).args[0]).to.equal(expectedURL);
     });
 });
