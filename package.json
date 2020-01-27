@@ -15,7 +15,7 @@
         "start": "node lib/index.js",
         "build": "babel src -d lib",
         "babeldev": "babel src -w -d lib",
-        "prepublish": "yarn lint && yarn test && yarn build",
+        "prepublish": "npm run lint && npm run test && npm run build",
         "lint": "eslint src test",
         "test": "mocha"
     },
@@ -50,8 +50,8 @@
     },
     "husky": {
         "hooks": {
-            "pre-commit": "yarn lint && lint-staged",
-            "pre-push": "yarn test"
+            "pre-commit": "npm run lint && lint-staged",
+            "pre-push": "npm run test"
         }
     },
     "lint-staged": {
