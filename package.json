@@ -1,6 +1,6 @@
 {
     "name": "chatfuel-api",
-    "version": "1.3.0",
+    "version": "2.0.0",
     "description": "A library to simplify sending messages and broadcasts to a Chatfuel bot over Facebook Messenger",
     "main": "lib/index.js",
     "author": "Eric Mathison <eric.l.mathison@gmail.com>",
