@@ -18,12 +18,6 @@ Node version 6 and later are required. Earlier versions are not supported.
 npm install chatfuel-api
 ```
 
-or
-
-```
-yarn add chatfuel-api
-```
-
 ## Usage
 
 ```
@@ -83,7 +77,7 @@ To render the complete JSON response, call the method
 
 **Creating Buttons**
 
-Types of buttons: `block, link, json, call, share`
+Types of buttons: `block, link, json, call`
 
 ```
 .addButton('button type', 'attr', 'button title', extensions)
@@ -98,7 +92,6 @@ The `attr` argument depends on the `button type`
 | link        | url                                 |
 | json        | url of callback                     |
 | call        | phone number _format: +19268881413_ |
-| share       | no arguments                        |
 
 When using a link button, the default behavior is to open the link in a new window. You can however enable Messenger extensions and open the link in a webview by passing `true` as the last argument.
 
@@ -137,27 +130,6 @@ const buttons = new Chatfuel()
 const message = new Chatfuel()
     .addGalleryCard('Test Title', 'https://test.url', 'Test Subtitle', buttons)
     .addGallery()
-    .render();
-```
-
-**Sending List Messages**
-
-Lists are similiar to galleries. Each list is composed of list items and optionally buttons. There can be one button per list item and upto 3 buttons per list.
-
-```
-const itemButton = new Chatfuel()
-    .addButton('block', 'Block Name', 'Button Title')
-    .render('button');
-
-const listButtons = new Chatfuel()
-    .addButton('link', 'https://link.url', 'Button Title', true)
-    .addButton('link', 'https://link.url', 'Button Title 2', true)
-    .render('button');
-
-const message = new Chatfuel()
-    .addListItem('List Title', 'https://listImage.url', 'List Subtitle', itemButton)
-    .addListButton(listButtons)
-    .addList()
     .render();
 ```
 
@@ -328,10 +300,6 @@ Running the tests are easy
 
 ```
 npm test
-```
-
-```
-yarn test
 ```
 
 ## License
