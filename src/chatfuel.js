@@ -7,11 +7,8 @@ import blockButton from './types/buttons/blockButton';
 import urlButton from './types/buttons/urlButton';
 import jsonButton from './types/buttons/jsonButton';
 import callButton from './types/buttons/callButton';
-import shareButton from './types/buttons/shareButton';
 import gallery from './types/gallery';
 import galleryCard from './types/galleryCard';
-import list from './types/list';
-import listItem from './types/listItem';
 import buttonBlock from './types/buttonBlock';
 import quickReply from './types/quickReply';
 import attributes from './types/attributes';
@@ -60,9 +57,7 @@ class Chatfuel {
         if (type === 'gallery') {
             this.wrapper.elements.length = Math.min(this.wrapper.elements.length, 10);
         }
-        if (type === 'list') {
-            this.wrapper.elements.length = Math.min(this.wrapper.elements.length, 5);
-        }
+
         return this.wrapper;
     }
 
@@ -112,10 +107,6 @@ class Chatfuel {
             this.buttons(callButton(attr, title));
             return this;
         }
-        if (type === 'share') {
-            this.buttons(shareButton());
-            return this;
-        }
         return this;
     }
 
@@ -132,22 +123,6 @@ class Chatfuel {
     addGalleryCard(title, imageUrl, subTitle, ...buttons) {
         const card = galleryCard(title, imageUrl, subTitle, buttons);
         this.elements('gallery', card);
-        return this;
-    }
-
-    addList() {
-        this.messages(list(this.wrapper.listButton, ...this.wrapper.elements));
-        return this;
-    }
-
-    addListButton(button) {
-        this.wrapper.listButton = button;
-        return this;
-    }
-
-    addListItem(title, imageUrl, subTitle, ...buttons) {
-        const item = listItem(title, imageUrl, subTitle, buttons);
-        this.elements('list', item);
         return this;
     }
 
