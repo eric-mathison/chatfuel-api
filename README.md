@@ -1,4 +1,4 @@
-# chatfuel-api
+# Chatfuel Messages and Broadcast API
 
 [![Build Status](https://travis-ci.org/eric-mathison/chatfuel-api.svg?branch=master)](https://travis-ci.org/eric-mathison/chatfuel-api)
 
@@ -14,13 +14,13 @@ Node version 6 and later are required. Earlier versions are not supported.
 
 ## Install
 
-```
+```bash
 npm install chatfuel-api
 ```
 
 ## Usage
 
-```
+```js
 import { Chatfuel, broadcast } from 'chatfuel-api';
 ```
 
@@ -28,13 +28,13 @@ import { Chatfuel, broadcast } from 'chatfuel-api';
 
 Instantiate the Chatfuel class for each JSON message sent to Chatfuel
 
-```
-new Chatfuel()
+```js
+new Chatfuel();
 ```
 
 To render the complete JSON response, call the method
 
-```
+```js
 .render();
 ```
 
@@ -42,35 +42,35 @@ To render the complete JSON response, call the method
 
 **Sending Text Messages**
 
-```
+```js
 .addText('Your text here')
 .render()
 ```
 
 **Sending Image Messages**
 
-```
+```js
 .addImage('URL of Image')
 .render()
 ```
 
 **Sending Video Messages**
 
-```
+```js
 .addVideo('URL of Video')
 .render()
 ```
 
 **Sending Audio Messages**
 
-```
+```js
 .addAudio('URL of Audio File')
 .render()
 ```
 
 **Sending File Messages**
 
-```
+```js
 .addFile('URL of File')
 .render()
 ```
@@ -79,7 +79,7 @@ To render the complete JSON response, call the method
 
 Types of buttons: `block, link, json, call`
 
-```
+```js
 .addButton('button type', 'attr', 'button title', extensions)
 .render('button');
 ```
@@ -95,7 +95,7 @@ The `attr` argument depends on the `button type`
 
 When using a link button, the default behavior is to open the link in a new window. You can however enable Messenger extensions and open the link in a webview by passing `true` as the last argument.
 
-```
+```js
 .addButton('link', 'https://url.com', 'Link', true)
 .render('button')
 ```
@@ -106,23 +106,21 @@ Buttons cannot be sent to your bot by themselves. They must be accompanied with 
 
 Define your buttons variable first, then pass it to the button block method.
 
-```
+```js
 const buttons = new Chatfuel()
     .addButton('link', 'https://test.com/test', 'URL Button')
     .addButton('block', 'Test Block', 'Block Button')
     .addButton('block', 'Another Block', 'Block Button 2')
     .render('button');
 
-const message = new Chatfuel()
-    .addButtonBlock('Text', buttons)
-    .render();
+const message = new Chatfuel().addButtonBlock('Text', buttons).render();
 ```
 
 **Sending Gallery Messages**
 
 Galleries are composed of gallery cards. It is necessary to define your cards first, then build the gallery response. Gallery cards can also include buttons.
 
-```
+```js
 const buttons = new Chatfuel()
     .addButton('link', 'https://link.com', 'Test Button')
     .render('button');
@@ -135,7 +133,7 @@ const message = new Chatfuel()
 
 **Sending Quick Replies**
 
-```
+```js
 .addQuickReply(type, attr, 'Title')
 .render('qr')
 ```
@@ -150,15 +148,13 @@ Quick Replies have two types: Block and JSON. Depending on the type you specify,
 Quick Replies can be attached to the following methods by including the quick relpies as the last argument
 : addText(), addImage(), addVideo(), addAudio(), addFile(), addButtonBlock()
 
-```
+```js
 const qReplies = new Chatfuel()
     .addQuickReply('block', ['Block 1'], 'Yes')
     .addQuickReply('block', ['Block 2'], 'No')
     .render('qr');
 
-const textMessage = new Chatfuel()
-    .addText('Testing Text Message', qReplies)
-    .render();
+const textMessage = new Chatfuel().addText('Testing Text Message', qReplies).render();
 ```
 
 **Set Attribute**
@@ -167,36 +163,34 @@ Chatfuel Attributes can be set by sending the attribute with a button or simply 
 
 Sending only the attribute
 
-```
-const message = new Chatfuel()
-    .addAttributes('attribute')
-    .render()
+```js
+const message = new Chatfuel().addAttributes('attribute').render();
 ```
 
 Sending an attribute with a JSON Callback Button
 
-```
+```js
 const message = new Chatfuel()
     .addAttributes('attribute', 'json', 'json button', 'https://callback.url')
-    .render()
+    .render();
 ```
 
 Sending multiple attributes with a Block Button
 
-```
+```js
 const attributes = {
     attribute1: '1',
     attribute2: '2',
-}
+};
 
 const message = new Chatfuel()
     .addAttributes(attributes, 'block', 'block button', ['Block Name'])
-    .render()
+    .render();
 ```
 
 **Sending Redirect to Block Messages**
 
-```
+```js
 .addRedirect('block 1', 'block 2')
 .render()
 ```
@@ -207,7 +201,7 @@ To send broadcasts you'll need the botId, blockId, userId and token from the Cha
 
 Create an object that specifies these options and pass it to the broadcast function.
 
-```
+```js
 const options = {
     // required
     botId: 'Your Bot URL',
@@ -226,7 +220,7 @@ const options = {
 
 The broadcast function returns a promise, so use basic promise handling for the response and error.
 
-```
+```js
 broadcast(options)
     .then(() => {
         // no response is given
@@ -240,7 +234,7 @@ broadcast(options)
 
 **Send a text and image message**
 
-```
+```js
 const message = new Chatfuel()
     .addText('Test Text')
     .addImage('https://imageUrl.png')
@@ -249,7 +243,7 @@ const message = new Chatfuel()
 
 **Send a text, image, video and two quick replies**
 
-```
+```js
 const qReplies = new Chatfuel()
     .addQuickReply('json', 'https://test.com/test?a=yes', 'JSON Yes Button')
     .addQuickReply('json', 'https://test.com/test?a=no', 'JSON No Button')
@@ -268,7 +262,7 @@ If you have external data such as a JSON response where you want to create a gal
 
 Example:
 
-```
+```js
 const galleryArray = [];
 // define data
 galleryArray.push({defined data});
@@ -276,7 +270,7 @@ galleryArray.push({defined data});
 
 Then build the gallery response from the new array.
 
-```
+```js
 const gallery = new Chatfuel();
 for (let i = 0; i < galleryArray.length; ) {
     gallery.addGalleryCard(
