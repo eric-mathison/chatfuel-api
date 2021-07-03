@@ -1,0 +1,4 @@
+{
+    "require": ["babel-register", "test/config/testConfig.js"],
+    "recursive": true
+}
